@@ -4,17 +4,14 @@ Support for the SpamAssassing configuration file syntax in Visual Studio Code.
 
 ## Features
 
-Highlights comments, meta, score, describe, header and uri definitions.
+The following statements are supported:
 
-It also supports regexp highlight where applicable.
-
-# Known issues
-
-Missing support for the following statements:
-
-- add_header
-- adsp_override
-- askdns
+- meta
+- score
+- required_score
+- describe
+- header
+- uri
 - bayes_auto_learn
 - bayes_auto_learn_threshold_nonspam
 - bayes_auto_learn_threshold_spam
@@ -23,37 +20,47 @@ Missing support for the following statements:
 - clear_originating_ip_headers
 - clear_report_template
 - clear_unsafe_report_template
-- def_whitelist_from_dkim
-- def_whitelist_from_rcvd
-- def_whitelist_from_spf
-- dns_local_ports_avoid
 - else
 - endif
-- freemail_domains
 - full
 - if
 - ifplugin
 - lang
 - mimeheader
-- ok_languages
-- ok_locales
-- originating_ip_headers
 - priority
 - rawbody
-- redirector_pattern
 - replace_inter
-- replace_post
 - replace_rules
 - replace_tag
 - report
 - report_contact
 - report_safe
 - required_score
-- require_version
 - reuse
-- test
 - tflags
 - unsafe_report
+
+The syntax also supports comments and correctly highlight regular expressions and perl in eval expressions.
+
+# Known issues
+
+Missing support for the following statements:
+
+- add_header
+- adsp_override
+- askdns
+- def_whitelist_from_dkim
+- def_whitelist_from_rcvd
+- def_whitelist_from_spf
+- dns_local_ports_avoid
+- freemail_domains
+- ok_languages
+- ok_locales
+- originating_ip_headers
+- redirector_pattern
+- replace_post
+- require_version
+- test
 - uridnsbl_skip_domain
 - uridnssub
 - urirhssub

@@ -3,111 +3,325 @@
 	"name": "SpamAssassin",
 	"patterns": [
 		{
-			"match": "(?i)^\\s*(score)\\s+([a-z0-9_]+)\\s+(-?[0-9]+(?:\\.[0-9]+)?)$",
-			"captures": {
-				"1": {
-					"name": "entity.name.function.spamassassin"
-				},
-				"2": {
-					"name": "variable.name.spamassassin"
-				},
-				"3": {
-					"name": "constant.numeric.spamassassin"
+			"include": "#statements"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"match": "#.*$",
+					"name": "comment.spamassassin"
 				}
-			}
+			]
 		},
-		{
-			"match": "(?i)^\\s*(describe)\\s+([a-z0-9_]+)\\s+(.*)$",
-			"captures": {
-				"1": {
-					"name": "entity.name.function.spamassassin"
+		"statements": {
+			"patterns": [
+				{
+					"include": "#comment"
 				},
-				"2": {
-					"name": "variable.name.spamassassin"
+				{
+					"include": "#rule_with_expr"
 				},
-				"3": {
-					"name": "string.unquoted.spamassassin"
+				{
+					"include": "#rule_partial"
+				},
+				{
+					"include": "#rule_regex"
+				},
+				{
+					"match": "(?i)^\\s*(if)\\s(.*?)(\\s*(?:#.*)?$)",
+					"captures": {
+						"1": {
+							"name": "keyword.control.flow.spamassassin"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#perl"
+								}
+							]
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(ifplugin)\\s(.*?)(\\s*(?:#.*)?$)",
+					"captures": {
+						"1": {
+							"name": "keyword.control.flow.spamassassin"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(endif|else)(\\s*(?:#.*)?$)",
+					"captures": {
+						"1": {
+							"name": "keyword.control.flow.spamassassin"
+						},
+						"2": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(?:clear(?:_unsafe)?_report_template|clear_(?:headers|originating_ip_headers))(\\s*(?:#.*)?$)",
+					"name": "entity.name.function.spamassassin",
+					"captures": {
+						"1": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(required_score|bayes_auto_learn(?:_threshold_(?:non)?spam)?|report_safe|priority)\\s+(-?[0-9]+(?:\\.[0-9]+)?)(\\s*(?:#.*)?$)",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "constant.numeric.spamassassin"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(unsafe_report|report|report_contact)(?:\\s+(.*?))?(\\s*(?:#.*)?$)",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "string.unquoted.spamassassin"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(score)\\s+([a-z0-9_]+)\\s+(-?[0-9]+(?:\\.[0-9]+)?)(\\s*(?:#.*)?$)",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "variable.name.spamassassin"
+						},
+						"3": {
+							"name": "constant.numeric.spamassassin"
+						},
+						"4": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(?:(lang)\\s+([a-z_]+)\\s+)?(describe)\\s+([a-z0-9_]+)\\s+(.*?)(\\s*(?:#.*)?$)",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "variable.name.spamassassin"
+						},
+						"3": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"4": {
+							"name": "variable.name.spamassassin"
+						},
+						"5": {
+							"name": "string.unquoted.spamassassin"
+						},
+						"6": {
+							"patterns": [
+								{
+									"include": "#comment"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(uri)\\s+([a-z0-9_]+)\\s+(.*)$",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "variable.name.spamassassin"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#regex"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(?i)^\\s*(meta)\\s+([a-z0-9_]+)(.*)$",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "variable.name.spamassassin"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#javascript"
+								}
+							]
+						}
+					}
 				}
-			}
+			]
 		},
-		{
-			"match": "(?i)^\\s*(header)\\s+([a-z0-9_]+)(.*)$",
-			"captures": {
-				"1": {
-					"name": "entity.name.function.spamassassin"
-				},
-				"2": {
-					"name": "variable.name.spamassassin"
-				},
-				"3": {
+		"rule_partial": {
+			"patterns": [
+				{
+					"begin": "(?i)^\\s*(tflags|replace_rules|reuse)\\s+([a-z0-9_]+)\\s*",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "variable.name.spamassassin"
+						}
+					},
+					"end": "$"
+				}
+			]
+		},
+		"rule_regex": {
+			"patterns": [
+				{
+					"begin": "(?i)^\\s*((?:raw)?body|replace_(?:tag|inter))\\s+([a-z0-9_]+)\\s*",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "variable.name.spamassassin"
+						}
+					},
+					"end": "$",
 					"patterns": [
 						{
-							"match": "(?i)\\s+([a-z][a-z0-9-]*)\\s+([=!]\\~)\\s+(.*)$",
-							"captures": {
-								"1": {
-									"name": "support.type.property-name.spamassassin"
-								},
-								"2": {
-									"name": "keyword.operator.spamassassin"
-								},
-								"3": {
-									"patterns": [
-										{
-											"include": "#regex"
-										}
-									]
-								}
-							}
+							"include": "#regex"
 						},
 						{
 							"include": "#perl-eval"
 						}
 					]
 				}
-			}
+			]
 		},
-		{
-			"match": "(?i)^\\s*(uri)\\s+([a-z0-9_]+)\\s+(.*)$",
-			"captures": {
-				"1": {
-					"name": "entity.name.function.spamassassin"
-				},
-				"2": {
-					"name": "variable.name.spamassassin"
-				},
-				"3": {
+		"rule_with_expr": {
+			"patterns": [
+				{
+					"begin": "(?i)^\\s*((?:mime)?header|full)\\s+([a-z0-9_]+)\\s*",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						},
+						"2": {
+							"name": "variable.name.spamassassin"
+						}
+					},
+					"end": "$",
 					"patterns": [
 						{
-							"include": "#regex"
+							"match": "(?i)(.*?)(\\s*(?:#.*)?$)",
+							"captures": {
+								"1": {
+									"patterns": [
+										{
+											"match": "(?i)([a-z][a-z0-9-]*)\\s+([=!]\\~)\\s+(.*)",
+											"captures": {
+												"1": {
+													"name": "support.type.property-name.spamassassin"
+												},
+												"2": {
+													"name": "keyword.operator.spamassassin"
+												},
+												"3": {
+													"patterns": [
+														{
+															"include": "#regex"
+														}
+													]
+												}
+											}
+										},
+										{
+											"match": "(?i)(exists:)([a-z][a-z0-9-]*)",
+											"captures": {
+												"1": {
+													"name": "entity.name.function.spamassassin"
+												},
+												"2": {
+													"name": "support.type.property-name.spamassassin"
+												}
+											}
+										},
+										{
+											"include": "#perl-eval"
+										}
+									]
+								},
+								"2": {
+									"patterns": [
+										{
+											"include": "#comment"
+										}
+									]
+								}
+							}
 						}
 					]
 				}
-			}
+			]
 		},
-		{
-			"match": "(?i)^\\s*(meta)\\s+([a-z0-9_]+)(.*)$",
-			"captures": {
-				"1": {
-					"name": "entity.name.function.spamassassin"
-				},
-				"2": {
-					"name": "variable.name.spamassassin"
-				},
-				"3": {
-					"patterns": [
-						{
-							"include": "#javascript"
-						}
-					]
-				}
-			}
-		},
-		{
-			"match": "^\\s*#.*",
-			"name": "comment.spamassassin"
-		}
-	],
-	"repository": {
 		"regex": {
 			"patterns": [
 				{
@@ -153,10 +367,29 @@
 				}
 			]
 		},
+		"perl": {
+			"patterns": [
+				{
+					"begin": "\\b",
+					"end": "$",
+					"patterns": [
+						{
+							"include": "source.perl"
+						}
+					],
+					"contentName": "source.perl"
+				}
+			]
+		},
 		"perl-eval": {
 			"patterns": [
 				{
-					"begin": "eval:",
+					"begin": "(eval:)",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.spamassassin"
+						}
+					},
 					"end": "$",
 					"patterns": [
 						{
