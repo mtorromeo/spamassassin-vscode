@@ -2,8 +2,13 @@
     "name": "spamassassin",
     "displayName": "spamassassin",
     "description": "SpamAssassin syntax highlight",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "publisher": "mtorromeo",
+    "author": {
+        "name": "Massimiliano Torromeo"
+    },
+    "icon": "images/spamassassin.png",
+    "private": true,
     "repository": {
         "type": "git",
         "url": "https://github.com/mtorromeo/spamassassin-vscode.git"
