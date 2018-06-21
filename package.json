@@ -2,7 +2,7 @@
     "name": "spamassassin",
     "displayName": "spamassassin",
     "description": "SpamAssassin syntax highlight",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "mtorromeo",
     "author": {
         "name": "Massimiliano Torromeo"
